@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { ElementIcon } from '@fungi/ui/react/ElementIcon';
-import { RarityStars } from '@fungi/ui/react/RarityStars';
+import { ElementIcon } from '@fungi/ui/react/ElementIcon.tsx';
+import { RarityStars } from '@fungi/ui/react/RarityStars.tsx';
 import type { CharacterSummary } from '@/islands/character-db/CharacterCard';
 
 export interface CharacterPickerModalProps {

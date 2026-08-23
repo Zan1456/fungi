@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useStore } from '@nanostores/react';
-import { Tabs } from '@fungi/ui/Tabs';
+import { Tabs } from '@fungi/ui/Tabs.tsx';
 import { wishHistory } from '@stores/wishHistory';
 import { computePity } from '@lib/pity';
 import type { BannerTypeKey } from '@lib/wishTypes';

@@ -1,4 +1,4 @@
-import { ElementIcon } from '@fungi/ui/react/ElementIcon';
+import { ElementIcon } from '@fungi/ui/react/ElementIcon.tsx';
 import { RangeInput } from './TargetLevelInput';
 import type { PlannerEntry } from '@lib/materials';
 import type { CharacterSummary } from '@/islands/character-db/CharacterCard';

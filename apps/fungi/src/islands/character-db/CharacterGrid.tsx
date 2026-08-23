@@ -1,7 +1,7 @@
 import { useMemo, useState, type ReactNode } from 'react';
 import { CharacterCard, type CharacterSummary } from './CharacterCard';
-import type { ElementId } from '@fungi/ui/react/ElementIcon';
-import type { WeaponType } from '@fungi/ui/react/WeaponIcon';
+import type { ElementId } from '@fungi/ui/react/ElementIcon.tsx';
+import type { WeaponType } from '@fungi/ui/react/WeaponIcon.tsx';
 
 const ELEMENTS: ElementId[] = ['pyro', 'hydro', 'anemo', 'electro', 'dendro', 'cryo', 'geo'];
 const WEAPON_TYPES: WeaponType[] = ['sword', 'claymore', 'polearm', 'catalyst', 'bow'];

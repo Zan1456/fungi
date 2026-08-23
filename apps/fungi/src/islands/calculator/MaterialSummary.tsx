@@ -1,4 +1,4 @@
-import { ItemIcon } from '@fungi/ui/react/ItemIcon';
+import { ItemIcon } from '@fungi/ui/react/ItemIcon.tsx';
 import type { AggregateResult } from '@lib/materials';
 
 export interface MaterialSummaryLabels {

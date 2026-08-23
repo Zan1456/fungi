@@ -5,6 +5,7 @@ import ToolPageLayout from '@/layouts/ToolPageLayout.astro';
 import RarityStars from '@fungi/ui/RarityStars.astro';
 import ElementIcon from '@fungi/ui/ElementIcon.astro';
 import WeaponIcon from '@fungi/ui/WeaponIcon.astro';
+import CharacterPortrait from '@fungi/ui/CharacterPortrait.astro';
 import StatsTable from '@/components/character/StatsTable.astro';
 import AscensionMaterials from '@/components/character/AscensionMaterials.astro';
 import TalentMaterials from '@/components/character/TalentMaterials.astro';
@@ -32,10 +33,13 @@ if (!character) {
   </a>
 
   <div class="mb-8 flex items-center gap-4">
-    <ElementIcon element={character.element.id} size={48} />
+    <CharacterPortrait id={character.id} name={character.name} size={80} />
     <div>
-      <h2 class="text-lg font-medium text-foreground">{character.name}</h2>
-      <div class="mt-1 flex items-center gap-2">
+      <div class="mb-1 flex items-center gap-2">
+        <ElementIcon element={character.element.id} size={22} />
+        <h2 class="text-lg font-medium text-foreground">{character.name}</h2>
+      </div>
+      <div class="flex items-center gap-2">
         <RarityStars rarity={character.rarity} />
         <WeaponIcon type={character.weapon.id} size={18} />
       </div>
