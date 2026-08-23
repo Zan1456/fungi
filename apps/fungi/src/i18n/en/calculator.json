@@ -1,0 +1,11 @@
+{
+  "calculator.addCharacter": "Add character",
+  "calculator.ascension": "Ascension",
+  "calculator.normalAttack": "Normal attack",
+  "calculator.skill": "Skill",
+  "calculator.burst": "Burst",
+  "calculator.remove": "Remove",
+  "calculator.emptyPlanner": "Add characters to the planner to calculate the materials you need.",
+  "calculator.summaryTitle": "Material summary",
+  "calculator.summaryEmpty": "Nothing to summarize yet."
+}

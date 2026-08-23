@@ -1,0 +1,18 @@
+{
+  "characters.searchPlaceholder": "Keresés név szerint…",
+  "characters.filterElement": "Elem",
+  "characters.filterWeapon": "Fegyver",
+  "characters.filterRarity": "Ritkaság",
+  "characters.all": "Összes",
+  "characters.noResults": "Nincs a szűrésnek megfelelő karakter.",
+  "characters.stats": "Alapstatok (90. szint)",
+  "characters.ascensionMaterials": "Felemelési anyagok",
+  "characters.talentMaterials": "Tehetség anyagok",
+  "characters.hp": "ÉP",
+  "characters.atk": "Támadás",
+  "characters.def": "Védelem",
+  "characters.phase": "Fokozat",
+  "characters.mora": "Mora",
+  "characters.bossMaterial": "Boss anyag",
+  "characters.backToList": "Vissza a karakterekhez"
+}

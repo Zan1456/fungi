@@ -1,0 +1,28 @@
+---
+// One shared route generates every "coming soon" stub page (see comingSoonSections in
+// @lib/nav) so adding a future section to the nav doesn't require a new route file.
+export const prerender = true;
+
+import ToolPageLayout from '@/layouts/ToolPageLayout.astro';
+import ComingSoon from '@fungi/ui/ComingSoon.astro';
+import { locales, isLocale, defaultLocale, useTranslations } from '@lib/i18n';
+import { comingSoonSections } from '@lib/nav';
+
+export function getStaticPaths() {
+  return locales.flatMap((locale) =>
+    comingSoonSections.map((section) => ({ params: { locale, section: section.slug } })),
+  );
+}
+
+const { locale: rawLocale, section: rawSection } = Astro.params;
+const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+const section = comingSoonSections.find((s) => s.slug === rawSection);
+if (!section) {
+  return new Response(null, { status: 404 });
+}
+const t = useTranslations(locale);
+---
+
+<ToolPageLayout locale={locale} title={t(section.key)}>
+  <ComingSoon title={t(section.key)} description={t('common.comingSoonDescription')} />
+</ToolPageLayout>

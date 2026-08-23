@@ -1,0 +1,30 @@
+---
+import { locales, type Locale } from '@lib/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const path = Astro.url.pathname;
+
+function swap(target: Locale) {
+  const rest = path.replace(/^\/(hu|en)(?=\/|$)/, '') || '/';
+  return `/${target}${rest === '/' ? '' : rest}`;
+}
+---
+
+<div class="flex items-center gap-0.5 rounded-md border border-border p-0.5 text-xs">
+  {
+    locales.map((l) => (
+      <a
+        href={swap(l)}
+        class={`rounded px-2 py-1 font-mono uppercase transition-colors ${
+          l === locale ? 'bg-foreground text-background' : 'text-muted hover:text-foreground'
+        }`}
+      >
+        {l}
+      </a>
+    ))
+  }
+</div>

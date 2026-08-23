@@ -1,0 +1,44 @@
+---
+import { useTranslations, type Locale } from '@lib/i18n';
+import { navGroups } from '@lib/nav';
+import Badge from '@fungi/ui/Badge.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+
+<aside class="hidden w-56 shrink-0 md:block">
+  <nav class="sticky top-20 flex flex-col gap-6 text-sm">
+    {
+      navGroups.map((group) => (
+        <div>
+          <div class="mb-2 px-2 text-[11px] font-medium uppercase tracking-wide text-muted-2">{t(group.key)}</div>
+          <ul class="flex flex-col gap-0.5">
+            {group.items.map((item) => {
+              const href = (`/${locale}${item.href === '/' ? '' : item.href}`).replace(/\/$/, '') || '/';
+              const active = currentPath === href;
+              return (
+                <li>
+                  <a
+                    href={href}
+                    class={`flex items-center justify-between rounded-md px-2 py-1.5 transition-colors ${
+                      active ? 'bg-white/10 text-foreground' : 'text-muted hover:bg-white/5 hover:text-foreground'
+                    }`}
+                  >
+                    <span>{t(item.key)}</span>
+                    {!item.functional && <Badge class="ml-2 shrink-0">soon</Badge>}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ))
+    }
+  </nav>
+</aside>

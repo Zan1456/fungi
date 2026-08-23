@@ -1,0 +1,39 @@
+---
+export const prerender = true;
+
+import ToolPageLayout from '@/layouts/ToolPageLayout.astro';
+import { CharacterGrid } from '@/islands/character-db/CharacterGrid';
+import { locales, isLocale, defaultLocale, useTranslations } from '@lib/i18n';
+import { getCharacterList } from '@data/index';
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const { locale: rawLocale } = Astro.params;
+const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+const t = useTranslations(locale);
+
+const summaries = getCharacterList()
+  .map((c) => ({
+    id: c.id,
+    name: c.name,
+    rarity: c.rarity,
+    element: c.element?.id,
+    weapon: c.weapon?.id,
+  }))
+  .sort((a, b) => a.name.localeCompare(b.name));
+---
+
+<ToolPageLayout locale={locale} title={t('nav.characters')}>
+  <CharacterGrid
+    client:load
+    characters={summaries}
+    locale={locale}
+    labels={{
+      searchPlaceholder: t('characters.searchPlaceholder'),
+      all: t('characters.all'),
+      noResults: t('characters.noResults'),
+    }}
+  />
+</ToolPageLayout>

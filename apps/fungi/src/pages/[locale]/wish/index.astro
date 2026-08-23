@@ -1,0 +1,59 @@
+---
+export const prerender = true;
+
+import ToolPageLayout from '@/layouts/ToolPageLayout.astro';
+import { WishCounterApp } from '@/islands/wish-counter/WishCounterApp';
+import { locales, isLocale, defaultLocale, useTranslations } from '@lib/i18n';
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const { locale: rawLocale } = Astro.params;
+const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+const t = useTranslations(locale);
+---
+
+<ToolPageLayout locale={locale} title={t('nav.wish')}>
+  <WishCounterApp
+    client:only="react"
+    labels={{
+      banners: {
+        'character-event': t('wish.bannerCharacterEvent'),
+        'weapon-event': t('wish.bannerWeaponEvent'),
+        standard: t('wish.bannerStandard'),
+        beginners: t('wish.bannerBeginners'),
+        chronicled: t('wish.bannerChronicled'),
+      },
+      pity4: t('wish.pity4'),
+      pity5: t('wish.pity5'),
+      tabImport: t('wish.tabImport'),
+      tabHistory: t('wish.tabHistory'),
+      tabStats: t('wish.tabStats'),
+      chartEmpty: t('wish.chartEmpty'),
+      chartTooltip: t('wish.chartTooltip'),
+      importPanel: {
+        urlLabel: t('wish.urlLabel'),
+        urlPlaceholder: t('wish.urlPlaceholder'),
+        importButton: t('wish.importButton'),
+        importing: t('wish.importing'),
+        importErrorPrefix: t('wish.importErrorPrefix'),
+        exportButton: t('wish.exportButton'),
+        importJsonButton: t('wish.importJsonButton'),
+        clearButton: t('wish.clearButton'),
+        clearConfirm: t('wish.clearConfirm'),
+        manualTitle: t('wish.manualTitle'),
+        manualName: t('wish.manualName'),
+        manualRarity: t('wish.manualRarity'),
+        manualDate: t('wish.manualDate'),
+        manualAddButton: t('wish.manualAddButton'),
+      },
+      history: {
+        empty: t('wish.historyEmpty'),
+        name: t('wish.historyName'),
+        rarity: t('wish.historyRarity'),
+        date: t('wish.historyDate'),
+      },
+    }}
+  />
+</ToolPageLayout>

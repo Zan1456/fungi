@@ -1,0 +1,29 @@
+---
+export const prerender = true;
+
+import ToolPageLayout from '@/layouts/ToolPageLayout.astro';
+import { locales, isLocale, defaultLocale, useTranslations } from '@lib/i18n';
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const { locale: rawLocale } = Astro.params;
+const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+const t = useTranslations(locale);
+
+const entries = [{ date: '2026-08-23', hu: 'Az oldal első verziója elindult.', en: 'Initial version of the site launched.' }];
+---
+
+<ToolPageLayout locale={locale} title={t('nav.changelog')}>
+  <ul class="flex flex-col gap-4">
+    {
+      entries.map((entry) => (
+        <li class="rounded-lg border border-border p-4">
+          <div class="mb-1 font-mono text-xs text-muted-2">{entry.date}</div>
+          <p class="text-sm text-foreground">{locale === 'hu' ? entry.hu : entry.en}</p>
+        </li>
+      ))
+    }
+  </ul>
+</ToolPageLayout>

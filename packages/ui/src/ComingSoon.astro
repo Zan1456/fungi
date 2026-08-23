@@ -1,0 +1,21 @@
+---
+import Badge from './Badge.astro';
+
+// Deliberately takes plain, already-translated strings rather than i18n keys — this
+// package has no i18n of its own, callers resolve translations before passing props in.
+export interface Props {
+  title: string;
+  description?: string;
+  class?: string;
+}
+
+const { title, description, class: className = '' } = Astro.props;
+---
+
+<div
+  class={`flex flex-col items-center gap-4 rounded-xl border border-border bg-surface/40 px-8 py-20 text-center ${className}`}
+>
+  <Badge>coming soon</Badge>
+  <h1 class="font-mono text-2xl font-medium text-foreground">{title}</h1>
+  {description && <p class="max-w-md text-sm text-muted">{description}</p>}
+</div>

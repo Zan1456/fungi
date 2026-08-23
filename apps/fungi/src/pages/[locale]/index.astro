@@ -1,0 +1,48 @@
+---
+export const prerender = true;
+
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import DotGrid from '@fungi/ui/DotGrid.astro';
+import Button from '@fungi/ui/Button.astro';
+import Card from '@fungi/ui/Card.astro';
+import { locales, isLocale, defaultLocale, useTranslations } from '@lib/i18n';
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const { locale: rawLocale } = Astro.params;
+const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+const t = useTranslations(locale);
+---
+
+<BaseLayout locale={locale} description={t('home.heroSubtitle')}>
+  <section class="relative overflow-hidden rounded-2xl border border-border px-6 py-20 text-center sm:py-28">
+    <DotGrid />
+    <div class="relative mx-auto max-w-2xl">
+      <h1 class="text-3xl font-medium sm:text-5xl">{t('home.heroTitle')}</h1>
+      <p class="mt-4 text-muted sm:text-lg">{t('home.heroSubtitle')}</p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <Button href={`/${locale}/wish`} variant="primary">{t('home.ctaWish')}</Button>
+        <Button href={`/${locale}/calculator`} variant="secondary">{t('home.ctaCalculator')}</Button>
+      </div>
+    </div>
+  </section>
+
+  <section class="mt-16">
+    <h2 class="mb-4 font-mono text-xs font-medium uppercase tracking-wide text-muted-2">
+      {t('home.sectionToolsTitle')}
+    </h2>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <Card href={`/${locale}/wish`}>
+        <h3 class="font-medium">{t('nav.wish')}</h3>
+      </Card>
+      <Card href={`/${locale}/calculator`}>
+        <h3 class="font-medium">{t('nav.calculator')}</h3>
+      </Card>
+      <Card href={`/${locale}/characters`}>
+        <h3 class="font-medium">{t('nav.characters')}</h3>
+      </Card>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,22 @@
+---
+// Generic material/item icon with a graceful placeholder fallback (see public/images/placeholder.svg).
+export interface Props {
+  id: string;
+  name?: string;
+  size?: number;
+  class?: string;
+}
+
+const { id, name, size = 32, class: className = '' } = Astro.props;
+---
+
+<img
+  src={`/images/items/${id}.png`}
+  onerror="this.onerror=null;this.src='/images/placeholder.svg'"
+  alt={name ?? id}
+  width={size}
+  height={size}
+  loading="lazy"
+  class={`shrink-0 rounded-md bg-white/5 object-cover ring-1 ring-inset ring-white/10 ${className}`}
+  style={`width:${size}px;height:${size}px;`}
+/>

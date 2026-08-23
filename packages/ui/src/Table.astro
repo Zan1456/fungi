@@ -1,0 +1,15 @@
+---
+// Static table shell: hairline border container + reset table. Pages write their own
+// <thead>/<tbody> with `border-b border-border px-4 py-2 text-left` cells to match.
+export interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<div class={`overflow-x-auto rounded-lg border border-border ${className}`}>
+  <table class="w-full border-collapse text-sm">
+    <slot />
+  </table>
+</div>

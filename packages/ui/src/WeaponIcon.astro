@@ -1,0 +1,26 @@
+---
+export type WeaponType = 'sword' | 'claymore' | 'polearm' | 'catalyst' | 'bow';
+
+export interface Props {
+  type: WeaponType;
+  size?: number;
+  class?: string;
+}
+
+const { type, size = 24, class: className = '' } = Astro.props;
+---
+
+<span
+  class={`inline-flex shrink-0 items-center justify-center rounded-md bg-white/5 ring-1 ring-inset ring-white/10 ${className}`}
+  style={`width:${size}px;height:${size}px;`}
+  title={type}
+>
+  <img
+    src={`/images/weapons/types/${type}.svg`}
+    onerror="this.style.visibility='hidden'"
+    alt={type}
+    width={Math.round(size * 0.6)}
+    height={Math.round(size * 0.6)}
+    loading="lazy"
+  />
+</span>

@@ -1,0 +1,19 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { Locale } from '@lib/i18n';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description?: string;
+}
+
+const { locale, title, description } = Astro.props;
+---
+
+<BaseLayout locale={locale} title={title} description={description}>
+  <div class="mb-6">
+    <h1 class="font-mono text-xl font-medium">{title}</h1>
+  </div>
+  <slot />
+</BaseLayout>

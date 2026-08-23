@@ -1,0 +1,32 @@
+---
+export type BadgeTone = 'default' | 'accent' | 'success' | 'danger' | 'pyro' | 'hydro' | 'anemo' | 'electro' | 'dendro' | 'cryo' | 'geo';
+
+export interface Props {
+  tone?: BadgeTone;
+  class?: string;
+}
+
+const { tone = 'default', class: className = '' } = Astro.props;
+
+// Full class strings are written out literally (not composed at runtime) so Tailwind's
+// static scanner can find and generate them.
+const tones: Record<BadgeTone, string> = {
+  default: 'border-border text-muted',
+  accent: 'border-accent/40 text-accent',
+  success: 'border-success/40 text-success',
+  danger: 'border-danger/40 text-danger',
+  pyro: 'border-pyro/40 text-pyro',
+  hydro: 'border-hydro/40 text-hydro',
+  anemo: 'border-anemo/40 text-anemo',
+  electro: 'border-electro/40 text-electro',
+  dendro: 'border-dendro/40 text-dendro',
+  cryo: 'border-cryo/40 text-cryo',
+  geo: 'border-geo/40 text-geo',
+};
+---
+
+<span
+  class={`inline-flex items-center gap-1 rounded-md border px-2 py-0.5 text-[11px] font-medium uppercase tracking-wide ${tones[tone]} ${className}`}
+>
+  <slot />
+</span>

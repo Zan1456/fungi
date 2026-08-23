@@ -1,0 +1,53 @@
+---
+export const prerender = true;
+
+import ToolPageLayout from '@/layouts/ToolPageLayout.astro';
+import RarityStars from '@fungi/ui/RarityStars.astro';
+import ElementIcon from '@fungi/ui/ElementIcon.astro';
+import WeaponIcon from '@fungi/ui/WeaponIcon.astro';
+import StatsTable from '@/components/character/StatsTable.astro';
+import AscensionMaterials from '@/components/character/AscensionMaterials.astro';
+import TalentMaterials from '@/components/character/TalentMaterials.astro';
+import { locales, isLocale, defaultLocale, useTranslations } from '@lib/i18n';
+import { getCharacterList, getCharacter } from '@data/index';
+
+export function getStaticPaths() {
+  const ids = getCharacterList().map((c) => c.id);
+  return locales.flatMap((locale) => ids.map((id) => ({ params: { locale, id } })));
+}
+
+const { locale: rawLocale, id } = Astro.params;
+const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+const t = useTranslations(locale);
+const character = getCharacter(id!);
+
+if (!character) {
+  return new Response(null, { status: 404 });
+}
+---
+
+<ToolPageLayout locale={locale} title={character.name}>
+  <a href={`/${locale}/characters`} class="mb-4 inline-block text-xs text-muted hover:text-foreground">
+    ← {t('characters.backToList')}
+  </a>
+
+  <div class="mb-8 flex items-center gap-4">
+    <ElementIcon element={character.element.id} size={48} />
+    <div>
+      <h2 class="text-lg font-medium text-foreground">{character.name}</h2>
+      <div class="mt-1 flex items-center gap-2">
+        <RarityStars rarity={character.rarity} />
+        <WeaponIcon type={character.weapon.id} size={18} />
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
+    <StatsTable locale={locale} stats={character.stats} />
+    <TalentMaterials locale={locale} material={character.material} />
+  </div>
+
+  <div class="mt-8">
+    <AscensionMaterials locale={locale} phases={character.ascension} />
+  </div>
+</ToolPageLayout>

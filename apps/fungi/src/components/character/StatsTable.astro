@@ -1,0 +1,33 @@
+---
+import Table from '@fungi/ui/Table.astro';
+import { useTranslations, type Locale } from '@lib/i18n';
+
+interface Props {
+  locale: Locale;
+  stats: { hp: number; atk: number; def: number };
+}
+
+const { locale, stats } = Astro.props;
+const t = useTranslations(locale);
+const rows: [string, number][] = [
+  [t('characters.hp'), stats.hp],
+  [t('characters.atk'), stats.atk],
+  [t('characters.def'), stats.def],
+];
+---
+
+<div>
+  <h2 class="mb-2 font-mono text-xs uppercase tracking-wide text-muted-2">{t('characters.stats')}</h2>
+  <Table>
+    <tbody>
+      {
+        rows.map(([label, value]) => (
+          <tr class="border-b border-border last:border-0">
+            <td class="px-4 py-2 text-muted">{label}</td>
+            <td class="px-4 py-2 text-right font-mono text-foreground">{value.toLocaleString(locale)}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </Table>
+</div>

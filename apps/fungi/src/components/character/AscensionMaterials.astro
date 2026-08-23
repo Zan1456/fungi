@@ -1,0 +1,44 @@
+---
+import ItemIcon from '@fungi/ui/ItemIcon.astro';
+import { useTranslations, type Locale } from '@lib/i18n';
+import type { AscensionPhase } from '@data/types';
+
+interface Props {
+  locale: Locale;
+  phases: AscensionPhase[];
+}
+
+const { locale, phases } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<div>
+  <h2 class="mb-2 font-mono text-xs uppercase tracking-wide text-muted-2">{t('characters.ascensionMaterials')}</h2>
+  <div class="flex flex-col gap-3">
+    {
+      phases.map((phase, i) => (
+        <div class="rounded-lg border border-border p-3">
+          <div class="mb-2 flex items-center justify-between text-xs text-muted-2">
+            <span>
+              {t('characters.phase')} {i + 1}
+            </span>
+            <span class="font-mono">
+              {phase.mora.toLocaleString(locale)} {t('characters.mora')}
+            </span>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            {phase.items
+              .filter((ref) => ref.item && ref.item.id !== 'none' && ref.amount)
+              .map((ref) => (
+                <div class="flex items-center gap-2">
+                  <ItemIcon id={ref.item.id} name={ref.item.name} size={28} />
+                  <span class="text-sm text-foreground">{ref.item.name}</span>
+                  <span class="font-mono text-xs text-muted">×{ref.amount}</span>
+                </div>
+              ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>

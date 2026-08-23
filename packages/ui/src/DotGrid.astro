@@ -1,0 +1,10 @@
+---
+// Pure-CSS radial dot-grid background accent (see .dot-grid in global.css). No JS.
+export interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<div class={`dot-grid pointer-events-none absolute inset-0 ${className}`} aria-hidden="true"></div>

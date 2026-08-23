@@ -1,0 +1,42 @@
+---
+import ItemIcon from '@fungi/ui/ItemIcon.astro';
+import { useTranslations, type Locale } from '@lib/i18n';
+import type { CharacterMaterial, Item } from '@data/types';
+
+interface Props {
+  locale: Locale;
+  material?: CharacterMaterial;
+}
+
+const { locale, material } = Astro.props;
+const t = useTranslations(locale);
+
+const groups: { label: string; items: Item[] }[] = [];
+if (material?.book?.length) groups.push({ label: 'Book', items: material.book });
+if (material?.material?.length) groups.push({ label: 'Material', items: material.material });
+if (material?.boss) groups.push({ label: t('characters.bossMaterial'), items: [material.boss] });
+if (material?.local) groups.push({ label: 'Local', items: [material.local as Item] });
+---
+
+{
+  groups.length > 0 && (
+    <div>
+      <h2 class="mb-2 font-mono text-xs uppercase tracking-wide text-muted-2">{t('characters.talentMaterials')}</h2>
+      <div class="flex flex-col gap-3">
+        {groups.map((group) => (
+          <div>
+            <div class="mb-1 text-xs text-muted-2">{group.label}</div>
+            <div class="flex flex-wrap gap-2">
+              {group.items.map((item) => (
+                <div class="flex items-center gap-2 rounded-md border border-border px-2 py-1">
+                  <ItemIcon id={item.id} name={item.name} size={24} />
+                  <span class="text-sm text-foreground">{item.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}

@@ -1,0 +1,29 @@
+---
+export const prerender = true;
+
+import '@/styles/global.css';
+import { defaultLocale, useTranslations } from '@lib/i18n';
+
+// A locale-agnostic top-level 404 (Astro serves this for any unmatched route, including
+// ones outside /hu|/en). Keep it self-contained rather than pulling in BaseLayout's
+// locale-aware nav, since we may not know the visitor's locale here.
+const t = useTranslations(defaultLocale);
+---
+
+<!doctype html>
+<html lang={defaultLocale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>404 · {t('site.name')}</title>
+  </head>
+  <body class="flex min-h-screen flex-col items-center justify-center gap-4 bg-background px-4 text-center text-foreground">
+    <p class="font-mono text-xs uppercase tracking-wide text-muted-2">404</p>
+    <h1 class="text-2xl font-medium">Page not found</h1>
+    <div class="flex gap-3">
+      <a href="/hu" class="rounded-md border border-border px-4 py-2 text-sm hover:border-border-hover">Magyar</a>
+      <a href="/en" class="rounded-md border border-border px-4 py-2 text-sm hover:border-border-hover">English</a>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "calculator.addCharacter": "Karakter hozzáadása",
+  "calculator.ascension": "Felemelés",
+  "calculator.normalAttack": "Alaptámadás",
+  "calculator.skill": "Képesség",
+  "calculator.burst": "Robbanás",
+  "calculator.remove": "Eltávolítás",
+  "calculator.emptyPlanner": "Adj hozzá karaktereket a tervezőhöz a szükséges anyagok kiszámításához.",
+  "calculator.summaryTitle": "Összesített anyagok",
+  "calculator.summaryEmpty": "Még nincs mit összesíteni."
+}

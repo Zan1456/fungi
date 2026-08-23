@@ -1,0 +1,18 @@
+{
+  "characters.searchPlaceholder": "Search by name…",
+  "characters.filterElement": "Element",
+  "characters.filterWeapon": "Weapon",
+  "characters.filterRarity": "Rarity",
+  "characters.all": "All",
+  "characters.noResults": "No characters match this filter.",
+  "characters.stats": "Base stats (level 90)",
+  "characters.ascensionMaterials": "Ascension materials",
+  "characters.talentMaterials": "Talent materials",
+  "characters.hp": "HP",
+  "characters.atk": "ATK",
+  "characters.def": "DEF",
+  "characters.phase": "Phase",
+  "characters.mora": "Mora",
+  "characters.bossMaterial": "Boss material",
+  "characters.backToList": "Back to characters"
+}

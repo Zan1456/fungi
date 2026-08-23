@@ -1,0 +1,6 @@
+---
+// Root path has no locale; sniff Accept-Language and bounce to /hu or /en (hu is the default).
+const acceptLanguage = Astro.request.headers.get('accept-language')?.toLowerCase() ?? '';
+const preferEnglish = acceptLanguage.startsWith('en') && !acceptLanguage.includes('hu');
+return Astro.redirect(`/${preferEnglish ? 'en' : 'hu'}`, 302);
+---

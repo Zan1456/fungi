@@ -1,0 +1,46 @@
+---
+export const prerender = true;
+
+import ToolPageLayout from '@/layouts/ToolPageLayout.astro';
+import { CalculatorApp } from '@/islands/calculator/CalculatorApp';
+import { locales, isLocale, defaultLocale, useTranslations } from '@lib/i18n';
+import { getCharacterList } from '@data/index';
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const { locale: rawLocale } = Astro.params;
+const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+const t = useTranslations(locale);
+
+const summaries = getCharacterList()
+  .map((c) => ({
+    id: c.id,
+    name: c.name,
+    rarity: c.rarity,
+    element: c.element?.id,
+    weapon: c.weapon?.id,
+  }))
+  .sort((a, b) => a.name.localeCompare(b.name));
+---
+
+<ToolPageLayout locale={locale} title={t('nav.calculator')}>
+  <CalculatorApp
+    client:only="react"
+    characters={summaries}
+    labels={{
+      addCharacter: t('calculator.addCharacter'),
+      searchPlaceholder: t('characters.searchPlaceholder'),
+      ascension: t('calculator.ascension'),
+      normalAttack: t('calculator.normalAttack'),
+      skill: t('calculator.skill'),
+      burst: t('calculator.burst'),
+      remove: t('calculator.remove'),
+      emptyPlanner: t('calculator.emptyPlanner'),
+      summaryTitle: t('calculator.summaryTitle'),
+      mora: t('characters.mora'),
+      summaryEmpty: t('calculator.summaryEmpty'),
+    }}
+  />
+</ToolPageLayout>

@@ -1,0 +1,40 @@
+---
+import '@/styles/global.css';
+import { useTranslations, type Locale } from '@lib/i18n';
+import Header from '@/components/layout/Header.astro';
+import Sidebar from '@/components/layout/Sidebar.astro';
+import Footer from '@/components/layout/Footer.astro';
+
+interface Props {
+  locale: Locale;
+  title?: string;
+  description?: string;
+}
+
+const { locale, title, description } = Astro.props;
+const t = useTranslations(locale);
+const pageTitle = title ? `${title} · ${t('site.name')}` : `${t('site.name')} — ${t('site.tagline')}`;
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{pageTitle}</title>
+    {description && <meta name="description" content={description} />}
+  </head>
+  <body class="min-h-screen bg-background text-foreground antialiased">
+    <div class="flex min-h-screen flex-col">
+      <Header locale={locale} />
+      <div class="mx-auto flex w-full max-w-7xl flex-1 gap-8 px-4 py-6 sm:px-6 lg:px-8">
+        <Sidebar locale={locale} />
+        <main class="min-w-0 flex-1 pb-24">
+          <slot />
+        </main>
+      </div>
+      <Footer locale={locale} />
+    </div>
+  </body>
+</html>
