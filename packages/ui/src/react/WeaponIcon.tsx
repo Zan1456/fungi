@@ -14,7 +14,7 @@ export function WeaponIcon({ type, size = 24, className = '' }: WeaponIconProps)
       title={type}
     >
       <img
-        src={`/images/weapons/types/${type}.svg`}
+        src={`/images/weapons/types/${type}.png`}
         onError={(e) => {
           e.currentTarget.style.visibility = 'hidden';
         }}

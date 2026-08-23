@@ -8,6 +8,13 @@ unmodified in their data content, from [paimon.moe](https://github.com/MadeBarun
 reproduced below. `apps/fungi/src/data/index.ts` and `apps/fungi/src/data/types.ts` are original
 Fungi.moe code that types and re-exports this data — they are not part of the copied work.
 
+The 7 element icons under `public/images/elements/` and the 5 weapon-type icons under
+`public/images/weapons/types/` are likewise copied unmodified from the same paimon.moe repo
+(`static/images/elements/`, `static/images/weapons/{sword,claymore,polearm,catalyst,bow}.png`),
+under the same MIT License. Per-character/weapon/item icons under `public/images/{characters,
+weapons,items}/` are fetched separately at build time from Project Amber / Project Yatta
+(https://gi.yatta.moe) by `scripts/fetch-assets.mjs` — see that script's header comment.
+
 Fungi.moe is a fan project and is not affiliated with HoYoverse. Genshin Impact, game content
 and materials referenced in this data are trademarks and copyrights of HoYoverse.
 

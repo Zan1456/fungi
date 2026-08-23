@@ -26,7 +26,7 @@ export function ElementIcon({ element, size = 24, className = '' }: ElementIconP
       title={element}
     >
       <img
-        src={`/images/elements/${element}.svg`}
+        src={`/images/elements/${element}.png`}
         onError={(e) => {
           e.currentTarget.style.visibility = 'hidden';
         }}
